@@ -1,0 +1,287 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2AE8A65C155914DD00158B3D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AE8A65B155914DD00158B3D /* Cocoa.framework */; };
+		2AE8A666155914DD00158B3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2AE8A664155914DD00158B3D /* InfoPlist.strings */; };
+		2AE8A66F1559155A00158B3D /* XLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE8A66E1559155A00158B3D /* XLog.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2AE8A658155914DD00158B3D /* XLog.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XLog.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AE8A65B155914DD00158B3D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		2AE8A65E155914DD00158B3D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		2AE8A65F155914DD00158B3D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2AE8A660155914DD00158B3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2AE8A663155914DD00158B3D /* XLog-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XLog-Info.plist"; sourceTree = "<group>"; };
+		2AE8A665155914DD00158B3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2AE8A667155914DE00158B3D /* XLog-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XLog-Prefix.pch"; sourceTree = "<group>"; };
+		2AE8A66D1559155A00158B3D /* XLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLog.h; sourceTree = "<group>"; };
+		2AE8A66E1559155A00158B3D /* XLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLog.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2AE8A655155914DD00158B3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AE8A65C155914DD00158B3D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2AE8A64D155914DD00158B3D = {
+			isa = PBXGroup;
+			children = (
+				2AE8A661155914DD00158B3D /* XLog */,
+				2AE8A65A155914DD00158B3D /* Frameworks */,
+				2AE8A659155914DD00158B3D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2AE8A659155914DD00158B3D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2AE8A658155914DD00158B3D /* XLog.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2AE8A65A155914DD00158B3D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2AE8A65B155914DD00158B3D /* Cocoa.framework */,
+				2AE8A65D155914DD00158B3D /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2AE8A65D155914DD00158B3D /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2AE8A65E155914DD00158B3D /* AppKit.framework */,
+				2AE8A65F155914DD00158B3D /* CoreData.framework */,
+				2AE8A660155914DD00158B3D /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		2AE8A661155914DD00158B3D /* XLog */ = {
+			isa = PBXGroup;
+			children = (
+				2AE8A662155914DD00158B3D /* Supporting Files */,
+				2AE8A66D1559155A00158B3D /* XLog.h */,
+				2AE8A66E1559155A00158B3D /* XLog.m */,
+			);
+			path = XLog;
+			sourceTree = "<group>";
+		};
+		2AE8A662155914DD00158B3D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2AE8A663155914DD00158B3D /* XLog-Info.plist */,
+				2AE8A664155914DD00158B3D /* InfoPlist.strings */,
+				2AE8A667155914DE00158B3D /* XLog-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2AE8A657155914DD00158B3D /* XLog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2AE8A66A155914DE00158B3D /* Build configuration list for PBXNativeTarget "XLog" */;
+			buildPhases = (
+				2AE8A654155914DD00158B3D /* Sources */,
+				2AE8A655155914DD00158B3D /* Frameworks */,
+				2AE8A656155914DD00158B3D /* Resources */,
+				2AE8A670155916C500158B3D /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XLog;
+			productName = XLog;
+			productReference = 2AE8A658155914DD00158B3D /* XLog.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2AE8A64F155914DD00158B3D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 2AE8A652155914DD00158B3D /* Build configuration list for PBXProject "XLog" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2AE8A64D155914DD00158B3D;
+			productRefGroup = 2AE8A659155914DD00158B3D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2AE8A657155914DD00158B3D /* XLog */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2AE8A656155914DD00158B3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AE8A666155914DD00158B3D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2AE8A670155916C500158B3D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -rf ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin\nmkdir -p ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins \ncp -r build/Release/XLog.bundle ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2AE8A654155914DD00158B3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AE8A66F1559155A00158B3D /* XLog.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2AE8A664155914DD00158B3D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AE8A665155914DD00158B3D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2AE8A668155914DE00158B3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2AE8A669155914DE00158B3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2AE8A66B155914DE00158B3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "XLog/XLog-Prefix.pch";
+				INFOPLIST_FILE = "XLog/XLog-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		2AE8A66C155914DE00158B3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "XLog/XLog-Prefix.pch";
+				INFOPLIST_FILE = "XLog/XLog-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2AE8A652155914DD00158B3D /* Build configuration list for PBXProject "XLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AE8A668155914DE00158B3D /* Debug */,
+				2AE8A669155914DE00158B3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2AE8A66A155914DE00158B3D /* Build configuration list for PBXNativeTarget "XLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AE8A66B155914DE00158B3D /* Debug */,
+				2AE8A66C155914DE00158B3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2AE8A64F155914DD00158B3D /* Project object */;
+}
