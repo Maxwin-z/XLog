@@ -1,0 +1,12 @@
+版本支持Xcode4.0 +， 有问题请直接QQ反馈：50494978
+
+1. 安装
+$ ./install.sh
+即可安装，安装后重启Xcode生效
+
+2. 卸载
+$ rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin
+
+3. 使用
+请参考XLog_test工程。
+
