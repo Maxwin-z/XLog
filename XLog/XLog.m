@@ -10,8 +10,10 @@
 #import <objc/runtime.h>
 
 #ifndef DEBUG
-#define NSLog(...)
+#define MXLog(...)
 #endif
+
+#define MXLog(...)  write2log([NSString stringWithFormat:__VA_ARGS__])
 
 // env name
 #define XLOG_FLAG   "XLOG_FLAG"
@@ -38,16 +40,27 @@ static NSDictionary *hiddenAttrs = nil;
 // there are more than one projects opened at the same time, each one has a console. we need cache it.
 static NSMutableDictionary *consoleTextStorageMap = nil;    // <DVDFoldingTextStorage|DVTTextStorage *, XLog_Console *>
 
+
+// for log file
+const char *logfile = "log.txt";
+static FILE *logfp = 0;
+const long MAX_LOG_SIZE = 1000 * 1000;
+
+
 @implementation XLog
 
 + (void)pluginDidLoad:(NSBundle *)bundle
 {
-    NSLog(@"%s, %@", __PRETTY_FUNCTION__, bundle);
+    logfp = fopen([[NSString stringWithFormat:@"%@/%s", [bundle bundlePath], logfile] UTF8String], "w+");
+    if (logfp == 0) {
+        MXLog(@"open log file error");
+    }
+    MXLog(@"%s, %@", __PRETTY_FUNCTION__, bundle);
 }
 
 + (void)load
 {
-    NSLog(@"%s env[%s]", __PRETTY_FUNCTION__, getenv(XLOG_FLAG));
+    MXLog(@"%s env[%s]", __PRETTY_FUNCTION__, getenv(XLOG_FLAG));
 	if (getenv(XLOG_FLAG) && !strcmp(getenv(XLOG_FLAG), "YES")) {   // alreay installed
 		return;
     }
@@ -67,7 +80,7 @@ static NSMutableDictionary *consoleTextStorageMap = nil;    // <DVDFoldingTextSt
     NSPopUpButton *btn = (NSPopUpButton *)sender;
     XLog_Console *console = getConsole((NSTextStorage *)btn.tag);
     if (console == nil) {
-        NSLog(@"FIXME: Console is null in %s", __FUNCTION__);
+        MXLog(@"FIXME: Console is null in %s", __FUNCTION__);
         return ;
     }
     NSUInteger idx = [btn indexOfSelectedItem];
@@ -84,7 +97,7 @@ static NSMutableDictionary *consoleTextStorageMap = nil;    // <DVDFoldingTextSt
     NSButton *btn = (NSButton *)sender;
     XLog_Console *console = getConsole((NSTextStorage *)btn.tag);
     if (console == nil) {
-        NSLog(@"FIXME: Console is null in %s", __FUNCTION__);
+        MXLog(@"FIXME: Console is null in %s", __FUNCTION__);
         return ;
     }
 
@@ -101,7 +114,7 @@ static NSMutableDictionary *consoleTextStorageMap = nil;    // <DVDFoldingTextSt
 
 - (void)fixTextViewLayout:(NSTextView *)textView
 {
-    NSLog(@"fix display");
+    MXLog(@"fix display");
     CGRect frame = textView.frame;
     frame.size.width--;
     textView.frame = frame;
@@ -120,6 +133,7 @@ static NSMutableDictionary *consoleTextStorageMap = nil;    // <DVDFoldingTextSt
     originalFixAttributesInRange(self, _cmd, range);
     
     NSString *className = NSStringFromClass([self class]);
+    MXLog(@"fixAttributesInRange[%@]", className);
     // it must not a console textstorage.
     if (![className isEqualToString:@"DVTFoldingTextStorage"]  
         && ![className isEqualToString:@"DVTTextStorage"]) {
@@ -167,7 +181,7 @@ void replaceFixAttributesInRangeMethod()
 BOOL testTextStorage(NSTextStorage *textStorage)
 {
     id textView = nil;
-    // NSLog(@"%@, %lx", NSStringFromClass([textStorage class]), (long)textStorage);
+    // MXLog(@"%@, %lx", NSStringFromClass([textStorage class]), (long)textStorage);
     // is NSTextStorage instance
 	if ([textStorage respondsToSelector:@selector(layoutManagers)])
 	{
@@ -186,11 +200,11 @@ BOOL testTextStorage(NSTextStorage *textStorage)
     // try to find console NSTextView and toolbar View's commom parent. (Hardcode: I found it was NSView)
     NSView *pView = textView;
     while (pView != nil && ![NSStringFromClass([pView class]) isEqualToString:@"NSView"]) {
-        // NSLog(@"pView class:[%@]", NSStringFromClass([pView class]));
+        // MXLog(@"pView class:[%@]", NSStringFromClass([pView class]));
         pView = pView.superview;
     }
     if (pView == nil) { // pView should not be nil. or the Xcode's UI changes. Fix it in other Xcode versions.
-        NSLog(@"FIXME: Cannot find NSView in the hierarchy!");
+        MXLog(@"FIXME: Cannot find NSView in the hierarchy!");
         return NO;
     }
     //-- find toolbar view
@@ -203,7 +217,7 @@ BOOL testTextStorage(NSTextStorage *textStorage)
         }
     }
     if (toolbarView == nil) {
-        NSLog(@"FIXME: Cannot find toolbar view!");
+        MXLog(@"FIXME: Cannot find toolbar view!");
         return NO;
     }
     //-- find Output PopUpButton. add customized views after it.
@@ -216,7 +230,7 @@ BOOL testTextStorage(NSTextStorage *textStorage)
         }
     }
     if (outputPopUpButton == nil) {
-        NSLog(@"FIXME: Cannot find output popup button");
+        MXLog(@"FIXME: Cannot find output popup button");
         return NO;
     }
     //-- almost done. now we find all views we need. BUT the textStorage is not!!
@@ -228,7 +242,7 @@ BOOL testTextStorage(NSTextStorage *textStorage)
      */
     NSTextStorage *realTextStorage = nil;
     NSString *classInfo = [NSString stringWithFormat:@"%@", textStorage];
-    // NSLog(@"textStorage info:[%@]", classInfo);
+    // MXLog(@"textStorage info:[%@]", classInfo);
     NSRange r = [classInfo rangeOfString:@"realTextStorage: <DVTTextStorage: "];
     if (r.length > 0) { // find
         unsigned long long addr;
@@ -236,7 +250,7 @@ BOOL testTextStorage(NSTextStorage *textStorage)
         [scanner scanHexLongLong:&addr];
         if (addr > 0) { 
             realTextStorage = (NSTextStorage *)addr;
-            NSLog(@"Reset console textstorage:[%@]", realTextStorage);
+            MXLog(@"Reset console textstorage:[%@]", realTextStorage);
         }
     }
     
@@ -250,7 +264,7 @@ BOOL testTextStorage(NSTextStorage *textStorage)
     // add to map
     [consoleTextStorageMap setObject:console forKey:hash(textStorage)]; // add textStorage to prevent multipule init console
     [consoleTextStorageMap setObject:console forKey:hash(realTextStorage)]; // add realTextStorage to parse it.
-    // NSLog(@"%ld , %ld", [textStorage hash], [realTextStorage hash]); // there are equal...
+    // MXLog(@"%ld , %ld", [textStorage hash], [realTextStorage hash]); // there are equal...
     [console release];
     return YES;
 }
@@ -326,7 +340,7 @@ NSDictionary *getDefaultAttrs()
 XLog_Console *getConsole(NSTextStorage *textStorage)
 {
     XLog_Console *console = [consoleTextStorageMap objectForKey:hash(textStorage)];
-    // NSLog(@"getConsole: %@, %@", key, console);
+    // MXLog(@"getConsole: %@, %@", key, console);
     return console;
 }
 
@@ -414,11 +428,11 @@ void applyColor(NSTextStorage *textStorage, NSRange range)
         NSRange r = NSMakeRange(range.location + startRange.location + startRange.length, nextRange.location - startRange.location - startRange.length);
         // NSString *str = [[textStorage string] substringWithRange:r];
         if ([startColorStr isEqualToString:XLOG_COLOR_RESET]) {  // reset color
-            // NSLog(@"reset color for text[%@]", str);
+            // MXLog(@"reset color for text[%@]", str);
             [textStorage addAttributes:getDefaultAttrs() range:r];
         } else {    // set customized color
             NSColor *color = string2color(startColorStr);
-            // NSLog(@"set color[%@] for text[%@]", color, str);
+            // MXLog(@"set color[%@] for text[%@]", color, str);
             [textStorage addAttributes:[NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName] range:r];
         }
         startRange = nextRange;
@@ -444,7 +458,7 @@ void applyRegexFilter(NSTextStorage *textStorage, NSRange range)
     }
     
     NSArray *matches = [regex matchesInString:[textStorage string] options:0 range:range];
-    int loc = range.location;
+    long loc = range.location;
     for (NSTextCheckingResult *match in matches) {
         NSRange r = NSMakeRange(loc, match.range.location - loc);
         [textStorage addAttributes:hiddenAttrs range:r];
@@ -466,7 +480,7 @@ void applyLogLevel(NSTextStorage *textStorage, NSRange range, NSString *tag)
     // hidden string(...) between (start)...^[D]***^[/D]...^[D]***^[/D]...(end)
     NSRange startRange = NSMakeRange(0, 1);
     NSRange nextRange = [affectString rangeOfString:startDelimiter];
-    unsigned len = [affectString length];
+    unsigned long len = [affectString length];
     // hide head
     while (nextRange.length > 0) {
         NSRange r = NSMakeRange(range.location + startRange.location, nextRange.location - startRange.location + nextRange.length);
@@ -474,9 +488,9 @@ void applyLogLevel(NSTextStorage *textStorage, NSRange range, NSString *tag)
         
         // find next one
         NSRange tmpR = NSMakeRange(nextRange.location + nextRange.length, len - nextRange.location - nextRange.length);
-        // NSLog(@"find end tag string in %@", [affectString substringWithRange:tmpR]);
+        // MXLog(@"find end tag string in %@", [affectString substringWithRange:tmpR]);
         startRange = [affectString rangeOfString:endDelimiter options:0 range:tmpR];
-        if (startRange.length == 0) break;
+        if (startRange.length == 0l) break;
         nextRange = [affectString rangeOfString:startDelimiter options:0 range:NSMakeRange(startRange.location + startRange.length, len - startRange.location - startRange.length)];
     }
     // hide tail
@@ -489,7 +503,7 @@ void parse(XLog_Console *console, NSRange range)
     if (console == nil) return;
     NSTextStorage *textStorage = console.realTextStorage;
     // ROBUST: check if range is valid
-    unsigned len = [textStorage length];
+    unsigned long len = [textStorage length];
     if (range.location >= len || range.location + range.length > len) {
         return ;
     }
@@ -526,3 +540,30 @@ void reset(NSTextStorage *textStorage)
     NSRange range = NSMakeRange(0, [textStorage length]);
     [textStorage addAttributes:getDefaultAttrs() range:range];
 }
+
+// rewrite log to file
+void write2log(NSString *str)
+{
+    NSLog(@"%@", str);
+
+    if (logfp == 0) {
+        return ;
+    }
+    
+    long size = ftell(logfp);
+    if (size > MAX_LOG_SIZE) {  // write log from beginning
+        fseek(logfp, 0, SEEK_SET);
+    }
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    //[dateFormatter setDateFormat:@"hh:mm:ss"]
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+    NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
+    [dateFormatter release];
+
+    fprintf(logfp, "%s %s\n", [timeString UTF8String], [str UTF8String]);
+
+}
+

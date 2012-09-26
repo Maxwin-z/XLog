@@ -101,3 +101,5 @@ void applyLogLevel(NSTextStorage *textStorage, NSRange range, NSString *tag);   
 void parse(XLog_Console *console, NSRange range);  // entry to do apply color, regex filter and log level.
 void reset(NSTextStorage *textStorage);   // clear all the filters, reset the textStorage to default. Sorry, this method also reset DGB color, font 
 
+// log util
+void write2log(NSString *str);

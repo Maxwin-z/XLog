@@ -120,7 +120,7 @@
 		2AE8A64F155914DD00158B3D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 2AE8A652155914DD00158B3D /* Build configuration list for PBXProject "XLog" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -162,7 +162,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin\nmkdir -p ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins \ncp -r build/Release/XLog.bundle ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin\n";
+			shellScript = "rm -rf ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin\nmkdir -p ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins \ncp -r Build/Products/Debug/XLog.bundle ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -239,6 +239,7 @@
 		2AE8A66B155914DE00158B3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XLog/XLog-Prefix.pch";
 				INFOPLIST_FILE = "XLog/XLog-Info.plist";
@@ -251,6 +252,7 @@
 		2AE8A66C155914DE00158B3D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XLog/XLog-Prefix.pch";
 				INFOPLIST_FILE = "XLog/XLog-Info.plist";
