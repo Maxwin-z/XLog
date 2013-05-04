@@ -162,7 +162,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin\nmkdir -p ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins \ncp -r Build/Products/Debug/XLog.bundle ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin\n";
+			shellScript = "rm -rf ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin\nmkdir -p ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins \ncp -r $BUILT_PRODUCTS_DIR/XLog.bundle ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/XLog.xcplugin\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
