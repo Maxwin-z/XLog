@@ -1,3 +1,6 @@
+### Note
+Support Xcode5, see [XLog5](https://github.com/Maxwin-z/XLog5) plz.
+
 Only Support Xcode4.0+
 
 1. Install
