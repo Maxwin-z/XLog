@@ -16,4 +16,4 @@ XLog Only Support Xcode4.0+
 3. How to use
   See XLog_test project.
 
-![screenshot](http://github.com/Maxwin-z/XLog/raw/master/ScreenShot.png)
+![screenshot](https://raw.githubusercontent.com/Maxwin-z/XLog/master/ScreenShot.png)
